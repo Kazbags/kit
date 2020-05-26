@@ -6,6 +6,7 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
 import pytz
 from sqlalchemy import create_engine
@@ -16,6 +17,7 @@ from helpers import login_required
 
 # Configure application
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_num=0, x_proto=1)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
