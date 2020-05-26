@@ -6,6 +6,7 @@ cs50==5.0.4
 DateTime==4.3
 Flask==1.1.2
 Flask-Session==0.3.2
+gunicorn==20.0.4
 idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
