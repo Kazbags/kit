@@ -1066,8 +1066,9 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-""" Errors """
 """
+""" Errors """
+
 ###----- Errors ----->
 def errorhandler(e):
     """Handle error"""
