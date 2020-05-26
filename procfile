@@ -1,2 +1,2 @@
-web: gunicorn --chdir kit application:app
 heroku ps:scale web=1
+web: gunicorn --chdir kit application:app
