@@ -1,1 +1,1 @@
-web: gunicorn --chdir kit application:app
+web: gunicorn application:app
