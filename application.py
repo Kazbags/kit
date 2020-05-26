@@ -6,7 +6,6 @@ from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
 import pytz
 from sqlalchemy import create_engine
@@ -33,25 +32,24 @@ def after_request(response):
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
-"""
+
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-"""
+
 
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
-"""
 db = scoped_session(sessionmaker(bind=engine))
-"""
+
 
 """ Dropdowns """
 
 ###----- Update booking form dropdowns ----->
 @app.route('/_booking_dropdown')
-
+@login_required
 def booking_dropdown():
 
     # The value of the department dropdown (selected by the user)
@@ -72,7 +70,7 @@ def booking_dropdown():
     return jsonify(html_string_selected=html_string_selected, html_string_selected_item=html_string_selected_item)
 
 @app.route('/_booking_item_dropdown')
-
+@login_required
 def booking_item_dropdown():
 
     # The value of type dropdown (selected by the user)
@@ -158,7 +156,7 @@ def get_item_dropdown_values(type):
 
 ###----- Update add item form dropdowns ----->
 @app.route('/_update_dropdown')
-
+@login_required
 def update_dropdown():
 
     # the value of the department dropdown (selected by the user)
@@ -180,7 +178,7 @@ def update_dropdown():
     return jsonify(html_string_selected=html_string_selected, html_string_selected_item=html_string_selected_item)
 
 @app.route('/_update_item_dropdown')
-
+@login_required
 def update_item_dropdown():
 
     # the value of the type dropdown (selected by the user)
@@ -203,7 +201,7 @@ def update_item_dropdown():
 
 ###----- Equipment list ----->
 @app.route("/", methods=["GET", "POST"])
-
+@login_required
 def index():
 
 
@@ -306,7 +304,7 @@ def index():
 
 ###----- Asset info ----->
 @app.route("/asset/<id>", methods=["GET", "POST"])
-
+@login_required
 def asset(id):
 
     # Venue dropdown
@@ -352,7 +350,7 @@ def asset(id):
 
 ###----- Add Asset ----->
 @app.route("/add", methods=["GET", "POST"])
-
+@login_required
 def add():
 
     # User reached route via POST (as by submitting a form via POST)
@@ -427,7 +425,7 @@ def add():
 
 ###----- Delete Asset ----->
 @app.route("/deleteitem/<id>", methods=["POST"])
-
+@login_required
 def deleteitem(id):
 
 
@@ -442,7 +440,7 @@ def deleteitem(id):
 """ Bookings """
 
 @app.route("/addbooking", methods=["GET", "POST"])
-
+@login_required
 def addbooking():
 
     #----- Get booking form input ----->
@@ -559,7 +557,7 @@ def addbooking():
 
 ###---- Booking list and add booking ----->
 @app.route("/booking", methods=["GET", "POST"])
-
+@login_required
 def booking():
 
     if request.method == "POST":
@@ -638,7 +636,7 @@ def booking():
 
 ###----- Booking info ----->
 @app.route("/bookinginfo/<id>", methods=["GET", "POST"])
-
+@login_required
 def bookinginfo(id):
 
     # id returned as input from booking url
@@ -755,7 +753,7 @@ def bookinginfo(id):
 
 ###----- Calendar Events ----->
 @app.route("/calendar", methods=["GET", "POST"])
-
+@login_required
 def calendar():
     #initiallize event list
     events = []
@@ -895,7 +893,7 @@ def calendar():
 
 ###----- Delete Booking ----->
 @app.route("/delete/<id>", methods=["POST"])
-
+@login_required
 def delete(id):
 
     id=id
@@ -910,7 +908,7 @@ def delete(id):
 
 ###----- Department Asset Count ----->
 @app.route("/dept/<dept>", methods=["GET", "POST"])
-
+@login_required
 def dept(dept):
 
     # Initiallize dictionary to contain type, quantity, and items
@@ -948,7 +946,7 @@ def dept(dept):
 
 ###----- QR codes ----->
 @app.route("/qr", methods=["GET", "POST"])
-
+@login_required
 def qr():
 
     # Get asset list by latest added
@@ -957,7 +955,7 @@ def qr():
     return render_template("qr.html", kit = kit)
 
 """ Login/Logout """
-"""
+
 ###----- Login ---->
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -1066,7 +1064,7 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-"""
+
 """ Errors """
 
 ###----- Errors ----->
