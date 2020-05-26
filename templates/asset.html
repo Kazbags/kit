@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Asset
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#notesubmit').prop('disabled',true);
+    $('#notetext').keyup(function(){
+        $('#notesubmit').prop('disabled', this.value == "" ? true : false);
+    })
+});
+</script>
+
+{% endblock %}
+
+{% block main %}
+
+<!-- Item header -->
+<div class="pt-3 pb-3 container" role="alert" style="background-color: rgba(0, 150, 150, 0.5)">
+  <h5 style="color:teal">{{ item }} (1 of {{ count }})</h5>
+</div>
+
+<!-- Delete -->
+<div class="row">
+<div class="col">
+<div class="roundbox">
+  <form action="/deleteitem/{{ itemid }}" method="post">
+  <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-4 mb-4 btn btn-outline-info">Delete Item</button>
+  </form>
+
+<!-- Book item -->
+  <button type="button" class="mb-1 btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+    Book Item
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Book Item</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form action="/addbooking" method="post">
+            <!-- item -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Item</label>
+              </div>
+              <select name="item" class="custom-select" id="inputGroupSelect01">
+                <option selected>{{ item }}</option>
+              </select>
+            </div>
+
+          <!-- How many -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="howmany" spellcheck="true" placeholder="How Many?" style="width:250px" type="text" text-align="center">
+          </div>
+
+          <!-- venue -->
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Venue</label>
+            </div>
+            <select name="venue" class="custom-select" id="inputGroupSelect01">
+
+              <option selected>{{ venueselect }}</option>
+              {% for dict_item in venue %}
+              {% for key, value in dict_item.items() %}
+              <option>{{ value }}</option>
+                                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+
+          <!-- Event -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="event" spellcheck="true" placeholder="Event" style="width:250px" type="text">
+          </div>
+
+          <!-- Booker -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="booker" spellcheck="true" placeholder="Booked by" style="width:250px" type="text">
+          </div>
+
+          <!-- Start date picker -->
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Start</label>
+            </div>
+            <input type="text" id="picker" class="form-control" name="start">
+            </div>
+
+            <!-- End date picker -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">End</label>
+              </div>
+              <input type="text" id="picker2" class="form-control" name="end">
+              </div>
+
+              <!-- send id for errorcheck re-route -->
+            <input type="text" hidden value="{{ itemid }}" class="form-control" name="id">
+
+            <!-- Submit -->
+          <button class="btn btn-info" type="submit">Submit</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QR Code -->
+    <div class="qrcode" id="qr">
+      </div>
+</div>
+</div>
+    <!-- Notes -->
+    <div class="col" style="flex: 40%">
+      <div class="mt-0 mb-4 row align-items-center">
+
+      <!-- Add note -->
+      <form action="/asset/{{ itemid }}" method="post">
+        <div class="input-group" style="width:100%">
+          <div class="input-group-prepend mb-3">
+            <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
+    <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:325px" type="text" text-align="center"></textarea>
+  </div>
+  </form>
+  </div>
+    <table  class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Notes</th>
+                    <th style="width: 30%">Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for dict_item in notes %}
+                    <tr>
+                        {% for key, value in dict_item.items() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+        </div>
+</div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/jquery.classyqr.js"></script>
+    <script src="/static/jquery.datetimepicker.full.min.js"></script>
+    <script>
+          $('#picker').datetimepicker({
+            timepicker: true,
+            datepicker: true,
+            format: 'Y-m-d H:m:s',
+            weeks: false,
+            value: '2020-5-16 9:00:00',
+            hours12: false,
+            yearStart: 2020,
+            step: 60,
+            yearEnd: 2030
+
+          })
+    </script>
+    <script>
+          $('#picker2').datetimepicker({
+            timepicker: true,
+            datepicker: true,
+            format: 'Y-m-d H:m:s',
+            weeks: false,
+            value: '2020-5-16 9:00:00',
+            hours12: false,
+            yearStart: 2020,
+            step: 60,
+            yearEnd: 2030
+
+          })
+    </script>
+
+<script>
+$(document).ready(function() {
+$('#qr').ClassyQR({
+   create: true, // signals the library to create the image tag inside the container div.
+   type: 'url', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
+   url: 'http://127.0.0.1:5000/asset/{{ itemid }}' // the text to encode in the QR.
+});
+});
+</script>
+
+
+
+{% endblock %}

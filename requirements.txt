@@ -1,0 +1,13 @@
+cs50
+Flask
+Flask-Session
+requests
+Tempfile
+Datetime
+Pytz
+werkzeug.exceptions
+Werkzueg.security
+pip install --upgrade google-api-python-client
+pip3 install --upgrade oauth2client
+pip install --upgrade google-api-python-client oauth2client
+pip install google-api-python-client

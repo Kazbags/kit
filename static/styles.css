@@ -1,0 +1,316 @@
+a { color: darkcyan; }
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+
+#alert-light
+{
+    width: 100%;
+}
+
+
+#pub
+{
+    background-image: url('/static/Pub.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* https://www.goodfreephotos.com/other-photos/mixed-scrabble-letters.jpg.php */
+#general
+{
+    background-image: url('/static/general.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://www.needpix.com/photo/1187277/music-guitar-two-color-combination-background */
+#music
+{
+    background-image: url('/static/music.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://www.needpix.com/photo/41829/movie-projector-projector-presentation-film-cinema-entertainment-nostalgia-super-8 */
+#movies
+{
+    background-image: url('/static/movies.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://www.needpix.com/photo/download/1270741/table-food-cover-wood-wood-fibre-boards-background-kitchen-diet-beautiful */
+#food
+{
+    background-image: url('/static/food.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://www.flickr.com/photos/captainnemo/10058721876 */
+#history
+{
+    background-image: url('/static/history.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://libreshot.com/red-background-book/ */
+#books
+{
+    background-image: url('/static/book.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://commons.wikimedia.org/wiki/File:Cadena_de_ADN.jpg */
+#science
+{
+    background-image: url('/static/science.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* https://www.wallpaperflare.com/search?wallpaper=retro+games */
+#picture
+{
+    background-image: url('/static/game.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.column {
+  flex: 20%;
+  padding: 10px;
+}
+
+
+.doom { flex: 1.7778; padding: 10px; }
+.lara { flex: 1.5; padding: 10px; }
+.tekken { flex: 1.7778; padding: 10px; }
+
+.axe { flex: 1.5362; padding: 10px; }
+.wipeout { flex: 1.5362; padding: 10px; }
+.hawk { flex: 1.5362; padding: 10px; }
+
+.row {
+  margin: 25px 0;
+}
+
+main .form-image
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+    margin: 20px;
+}
+
+.table table-striped
+{
+    height: 100%;
+    display:block;
+    overflow-y:auto;
+    background-color: white;
+}
+
+
+Footer {
+display:block;
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 50px;
+text-align: center;
+}
+
+.input-group, mb-3 .input-group-text {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 100% !important;
+}
+
+.input-group-text
+{
+    width:75px;
+}
+
+button{font-size:40px; line-height:60px;}
+
+.input-group-prepend, .btn-outline-info{
+background-color: white;
+}
+
+.roundbox {
+  border: 1px solid lightseagreen;
+  border-radius: 10px;
+}
+@media print
+{
+    #non-printable { display: none; }
+    #printable { display: block; }
+
+
+    header nav, footer { display: none; }
+
+@page {
+margin: 0cm;
+}
+}
+
+/*
+i wish this required CSS was better documented :(
+https://github.com/FezVrasta/popper.js/issues/674
+derived from this CSS on this page: https://popper.js.org/tooltip-examples.html
+*/
+
+.popper,
+.tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: #FFC107;
+  color: black;
+  width: 150px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  padding: 10px;
+  text-align: center;
+}
+.style5 .tooltip {
+  background: #1E252B;
+  color: #FFFFFF;
+  max-width: 200px;
+  width: auto;
+  font-size: .8rem;
+  padding: .5em 1em;
+}
+.popper .popper__arrow,
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+}
+
+.tooltip .tooltip-arrow,
+.popper .popper__arrow {
+  border-color: #FFC107;
+}
+.style5 .tooltip .tooltip-arrow {
+  border-color: #1E252B;
+}
+.popper[x-placement^="top"],
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+.popper[x-placement^="top"] .popper__arrow,
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.popper[x-placement^="bottom"],
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow,
+.popper[x-placement^="bottom"] .popper__arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="right"],
+.popper[x-placement^="right"] {
+  margin-left: 5px;
+}
+.popper[x-placement^="right"] .popper__arrow,
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.popper[x-placement^="left"],
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+.popper[x-placement^="left"] .popper__arrow,
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}

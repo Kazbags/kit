@@ -1,0 +1,262 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Asset
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#all_depts').change(function(){
+
+      $.getJSON('/_booking_dropdown', {
+        selected_dept: $('#all_depts').val()
+
+      }).success(function(data) {
+            $('#all_types').html(data.html_string_selected);
+            $('#all_items').html(data.html_string_selected_item);
+       })
+    });
+
+    $('#all_types').change(function(){
+
+      $.getJSON('/_booking_item_dropdown', {
+        selected_type: $('#all_types').val(),
+        selected_dept: $('#all_depts').val()
+
+      }).success(function(data) {
+            $('#all_items').html(data.html_string_selected);
+       })
+    });
+  });
+</script>
+<script>
+  
+$(document).ready(function(){
+    $('#notesubmit').prop('disabled',true);
+    $('#notetext').keyup(function(){
+        $('#notesubmit').prop('disabled', this.value == "" ? true : false);
+    })
+});
+</script
+{% endblock %}
+
+{% block main %}
+<!-- Booking info -->
+<table class="table table-striped">
+        <thead style="background-color:rgba(0, 150, 150, 0.5)">
+            <tr style="font-size:14px">
+                <th>ID</th>
+                <th>Department</th>
+                <th>Quantity</th>
+                <th>Item</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Event</th>
+                <th>Venue</th>
+                <th>Booked By</th>
+                <th>Added</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr style="font-size:13px">
+                  {% for dict_item in booking %}
+                        <td>{{ dict_item }}</td>
+                        {% endfor %}
+                </tr>
+        </tbody>
+    </table>
+
+
+<!-- Edit/Delete -->
+<div class="row">
+<div class="col">
+  <div class="roundbox">
+
+  <form action="/delete/{{ bookid }}" method="post">
+  <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-4 mb-4 btn btn-outline-info">Delete Booking</button>
+  </form>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="mb-4 btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+    Edit Booking
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Booking</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form action="/bookinginfo/{{ bookid }}" method="post">
+            <!-- department -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Dept.</label>
+              </div>
+              <select name="dept" class="form-control" id="all_depts">
+                {% for o in all_depts %}
+                        <option value="{{ o }}">{{ o }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- type -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Type</label>
+              </div>
+              <select name="type" class="form-control" id="all_types">
+                {% for o in all_types %}
+                        <option value="{{ o }}">{{ o }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <!-- item -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Item</label>
+              </div>
+              <select name="item" class="form-control" id="all_items">
+                {% for o in all_items %}
+                        <option value="{{ o }}">{{ o }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+          <!-- How many -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="howmany" spellcheck="true" placeholder="How Many?" style="width:250px" value="{{ quantity }}" type="text" text-align="center">
+          </div>
+
+          <!-- venue -->
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Venue</label>
+            </div>
+            <select name="venue" class="custom-select" id="inputGroupSelect01">
+
+              <option selected>{{ venueselect }}</option>
+              {% for dict_item in venue %}
+              {% for key, value in dict_item.items() %}
+              <option>{{ value }}</option>
+                                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+          <!-- Event -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="event" spellcheck="true" placeholder="Event" value="{{ event }}" style="width:250px" type="text">
+          </div>
+          <!-- Booker -->
+          <div class="form-group">
+          <input autocomplete="off" class="form-control" name="booker" spellcheck="true" placeholder="Booked by" value="{{ booker }}" style="width:250px" type="text">
+          </div>
+
+          <!-- Start date picker -->
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Start</label>
+            </div>
+            <input type="text" id="picker" class="form-control" name="start">
+            </div>
+
+            <!-- End date picker -->
+            <div class="input-group mb-3" style="width:250px">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">End</label>
+              </div>
+              <input type="text" id="picker2" class="form-control" name="end">
+              </div>
+
+          <!-- Submit -->
+          <button class="btn btn-info" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    </div>
+    <div class="col" style="flex: 40%">
+      <div class="mt-0 mb-4 row align-items-center">
+
+      <!-- Add note -->
+      <form action="/bookinginfo/{{ bookid }}" method="post">
+        <div class="input-group mb-3" style="width:100%">
+          <div class="input-group-prepend">
+            <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
+    <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:325px" type="text" text-align="center"></textarea>
+  </div>
+  </form>
+  </div>
+    <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Notes</th>
+                    <th style="width: 30%">Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for dict_item in notes %}
+                    <tr>
+                        {% for key, value in dict_item.items() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/jquery.classyqr.js"></script>
+    <script src="/static/jquery.datetimepicker.full.min.js"></script>
+    <script>
+          $('#picker').datetimepicker({
+            timepicker: true,
+            datepicker: true,
+            format: 'Y-m-d H:m:s',
+            weeks: false,
+            value: '2020-5-16 9:00:00',
+            hours12: false,
+            yearStart: 2020,
+            step: 60,
+            yearEnd: 2030,
+
+          })
+    </script>
+    <script>
+          $('#picker2').datetimepicker({
+            timepicker: true,
+            datepicker: true,
+            format: 'Y-m-d H:m:s',
+            weeks: false,
+            value: '2020-5-16 9:00:00',
+            hours12: false,
+            yearStart: 2020,
+            step: 60,
+            yearEnd: 2030,
+
+          })
+    </script>
+
+
+
+
+
+{% endblock %}
