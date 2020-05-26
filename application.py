@@ -12,7 +12,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
 
-from helpers import login_required
 
 # Configure application
 app = Flask(__name__)
@@ -33,11 +32,7 @@ def after_request(response):
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
-# Configure session to use filesystem (instead of signed cookies)
 
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 
 
 # Set up database
@@ -49,7 +44,6 @@ db = scoped_session(sessionmaker(bind=engine))
 
 ###----- Update booking form dropdowns ----->
 @app.route('/_booking_dropdown')
-@login_required
 def booking_dropdown():
 
     # The value of the department dropdown (selected by the user)
@@ -70,7 +64,6 @@ def booking_dropdown():
     return jsonify(html_string_selected=html_string_selected, html_string_selected_item=html_string_selected_item)
 
 @app.route('/_booking_item_dropdown')
-@login_required
 def booking_item_dropdown():
 
     # The value of type dropdown (selected by the user)
@@ -156,7 +149,6 @@ def get_item_dropdown_values(type):
 
 ###----- Update add item form dropdowns ----->
 @app.route('/_update_dropdown')
-@login_required
 def update_dropdown():
 
     # the value of the department dropdown (selected by the user)
@@ -178,7 +170,6 @@ def update_dropdown():
     return jsonify(html_string_selected=html_string_selected, html_string_selected_item=html_string_selected_item)
 
 @app.route('/_update_item_dropdown')
-@login_required
 def update_item_dropdown():
 
     # the value of the type dropdown (selected by the user)
@@ -201,7 +192,6 @@ def update_item_dropdown():
 
 ###----- Equipment list ----->
 @app.route("/", methods=["GET", "POST"])
-@login_required
 def index():
 
 
@@ -304,7 +294,6 @@ def index():
 
 ###----- Asset info ----->
 @app.route("/asset/<id>", methods=["GET", "POST"])
-@login_required
 def asset(id):
 
     # Venue dropdown
@@ -350,7 +339,6 @@ def asset(id):
 
 ###----- Add Asset ----->
 @app.route("/add", methods=["GET", "POST"])
-@login_required
 def add():
 
     # User reached route via POST (as by submitting a form via POST)
@@ -425,7 +413,6 @@ def add():
 
 ###----- Delete Asset ----->
 @app.route("/deleteitem/<id>", methods=["POST"])
-@login_required
 def deleteitem(id):
 
 
@@ -440,7 +427,6 @@ def deleteitem(id):
 """ Bookings """
 
 @app.route("/addbooking", methods=["GET", "POST"])
-@login_required
 def addbooking():
 
     #----- Get booking form input ----->
@@ -557,7 +543,6 @@ def addbooking():
 
 ###---- Booking list and add booking ----->
 @app.route("/booking", methods=["GET", "POST"])
-@login_required
 def booking():
 
     if request.method == "POST":
@@ -636,7 +621,6 @@ def booking():
 
 ###----- Booking info ----->
 @app.route("/bookinginfo/<id>", methods=["GET", "POST"])
-@login_required
 def bookinginfo(id):
 
     # id returned as input from booking url
@@ -753,7 +737,6 @@ def bookinginfo(id):
 
 ###----- Calendar Events ----->
 @app.route("/calendar", methods=["GET", "POST"])
-@login_required
 def calendar():
     #initiallize event list
     events = []
@@ -893,7 +876,7 @@ def calendar():
 
 ###----- Delete Booking ----->
 @app.route("/delete/<id>", methods=["POST"])
-@login_required
+
 def delete(id):
 
     id=id
@@ -908,7 +891,7 @@ def delete(id):
 
 ###----- Department Asset Count ----->
 @app.route("/dept/<dept>", methods=["GET", "POST"])
-@login_required
+
 def dept(dept):
 
     # Initiallize dictionary to contain type, quantity, and items
@@ -946,7 +929,6 @@ def dept(dept):
 
 ###----- QR codes ----->
 @app.route("/qr", methods=["GET", "POST"])
-@login_required
 def qr():
 
     # Get asset list by latest added
@@ -955,115 +937,6 @@ def qr():
     return render_template("qr.html", kit = kit)
 
 """ Login/Logout """
-
-###----- Login ---->
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-    # Forget any user_id
-    session.clear()
-
-    # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
-
-
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            flash("must provide username")
-            return render_template("login.html")
-
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            flash("must provide password")
-            return render_template("login.html")
-
-        name = request.form.get("username")
-        # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = :username", {"username": name}).fetchall()
-
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            flash("invalid username and/or password")
-            return render_template("login.html")
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
-        return redirect("/")
-
-    # User reached route via GET (as by clicking a link or via redirect)
-    else:
-        return render_template("login.html")
-
-###----- Register ----->
-@app.route("/register", methods=["GET", "POST"])
-def register():
-
-    # User reached route via POST (as by submitting a form via POST)
-    if request.method == "POST":
-
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            flash("must provide username")
-            return render_template("register.html")
-
-        rows = db.execute("SELECT * FROM users WHERE username = :username",
-                  {"username": request.form.get("username")}).fetchall()
-
-        if len(rows) != 0:
-            flash("The username is already taken")
-            return render_template("register.html")
-
-        # Ensure password was submitted
-        elif not request.form.get("password"):
-            flash("must provide password")
-            return render_template("register.html")
-
-        # Ensure password confirmation was submitted
-        elif not request.form.get("confirmation"):
-            flash("must provide password confirmation")
-            return render_template("register.html")
-
-        # Ensure passwords are matching
-        elif request.form.get("password") != request.form.get("confirmation"):
-            flash("Passwords didn't match")
-            return render_template("register.html")
-
-        # Hash password / Store password hash_password =
-        hashed_password = generate_password_hash(request.form.get("password"))
-
-        # Add user to database
-        result = db.execute("INSERT INTO users (username, hash, correct, time) VALUES(:username, :hash, :correct, :time)",
-                {"username": request.form.get("username"),
-                "hash": hashed_password,
-                "correct": None,
-                "time": None})
-        db.commit()
-
-        rows = db.execute("SELECT * FROM users WHERE username = :username",
-                  {"username": request.form.get("username")}).fetchall()
-
-        # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
-
-        # Redirect user to home page
-        return redirect("/")
-
-    # User reached route via GET (as by clicking a link or via redirect)
-    else:
-        return render_template("register.html")
-
-###----- Logout ----->
-@app.route("/logout")
-def logout():
-
-    # Forget any user_id
-    session.clear()
-
-    # Redirect user to login form
-    return redirect("/")
-
 
 """ Errors """
 
