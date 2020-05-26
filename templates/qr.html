@@ -56,7 +56,7 @@ $(document).ready(function() {
 $('#qr{{ asset['id'] }}').ClassyQR({
 create: true, // signals the library to create the image tag inside the container div.
 type: 'url', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
-url: 'http://127.0.0.1:5000/asset/{{ asset['id'] }}' // the text to encode in the QR.
+url: 'https://morning-shore-34495.herokuapp.com/asset/{{ asset['id'] }}' // the text to encode in the QR.
 });
 });
 </script>

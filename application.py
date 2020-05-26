@@ -605,7 +605,7 @@ def booking():
                                        bookings=bookings)
 
     else:
-        
+
         #----- Booking List ----->
         # Ordered dictionary of bookings
         bookings = db.execute("SELECT id, quantity, item, start, endtime, event, venue FROM bookings ORDER BY id DESC").fetchall()
@@ -763,7 +763,7 @@ def calendar():
     for booking in bookings:
         # Values for event json for Fullcalendar
         id = booking['id']
-        url = f"http://127.0.0.1:5000/bookinginfo/{id}"
+        url = f"https://morning-shore-34495.herokuapp.com/bookinginfo/{id}"
         item = booking['item']
         quantity = booking['quantity']
         dept = booking['dept']
