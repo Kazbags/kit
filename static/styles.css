@@ -82,7 +82,7 @@ main .form-image
 @media only screen and (max-width: 480px) {
     /* horizontal scrollbar for tables if mobile screen */
     .tablemobile {
-        overflow-x: auto;
+        overflow-x: scroll;
         display: block;
     }
 }
@@ -91,6 +91,7 @@ main .form-image
     height: 100%;
     display:block;
     overflow-y:auto;
+    overflow-x:scroll;
     background-color: white;
 }
 
