@@ -39,6 +39,9 @@
         <script src='/static/interaction/main.js'></script>
 
 
+
+
+
         {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
 
@@ -55,7 +58,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
-
+                {% if session.user_id %}
                     <ul class="navbar-nav mr-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/">Assets</a></li>
                         <li class="nav-item"><a class="nav-link" href="/booking">Bookings</a></li>
@@ -66,11 +69,15 @@
                         <li class="nav-item"><a class="nav-link" href="/dept/Lighting">Lighting</a></li>
                         <li class="nav-item"><a class="nav-link" href="/dept/Sound">Sound</a></li>
                         <li class="nav-item"><a class="nav-link" href="/dept/AV">AV</a></li>
-                      
+                        <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
 
                     </ul>
-
-
+                {% else %}
+                    <ul class="navbar-nav ml-auto mt-2">
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                    </ul>
+                {% endif %}
             </div>
         </nav>
 
