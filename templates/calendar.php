@@ -12,7 +12,7 @@
 }
 </style>
 
-<div class="container">
+<div class="container tablemobile">
  <div id="calendar"></div>
 </div>
 
