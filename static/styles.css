@@ -55,78 +55,6 @@ main img
 }
 
 
-#pub
-{
-    background-image: url('/static/Pub.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-
-/* https://www.goodfreephotos.com/other-photos/mixed-scrabble-letters.jpg.php */
-#general
-{
-    background-image: url('/static/general.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://www.needpix.com/photo/1187277/music-guitar-two-color-combination-background */
-#music
-{
-    background-image: url('/static/music.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://www.needpix.com/photo/41829/movie-projector-projector-presentation-film-cinema-entertainment-nostalgia-super-8 */
-#movies
-{
-    background-image: url('/static/movies.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://www.needpix.com/photo/download/1270741/table-food-cover-wood-wood-fibre-boards-background-kitchen-diet-beautiful */
-#food
-{
-    background-image: url('/static/food.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://www.flickr.com/photos/captainnemo/10058721876 */
-#history
-{
-    background-image: url('/static/history.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://libreshot.com/red-background-book/ */
-#books
-{
-    background-image: url('/static/book.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://commons.wikimedia.org/wiki/File:Cadena_de_ADN.jpg */
-#science
-{
-    background-image: url('/static/science.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-/* https://www.wallpaperflare.com/search?wallpaper=retro+games */
-#picture
-{
-    background-image: url('/static/game.jpeg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .row {
   display: flex;
   justify-content: center;
@@ -136,15 +64,6 @@ main img
   flex: 20%;
   padding: 10px;
 }
-
-
-.doom { flex: 1.7778; padding: 10px; }
-.lara { flex: 1.5; padding: 10px; }
-.tekken { flex: 1.7778; padding: 10px; }
-
-.axe { flex: 1.5362; padding: 10px; }
-.wipeout { flex: 1.5362; padding: 10px; }
-.hawk { flex: 1.5362; padding: 10px; }
 
 .row {
   margin: 25px 0;
@@ -160,14 +79,32 @@ main .form-image
     margin: 20px;
 }
 
+@media only screen and (max-width: 480px) {
+    /* horizontal scrollbar for tables if mobile screen */
+    .tablemobile {
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
 .table table-striped
 {
     height: 100%;
     display:block;
     overflow-y:auto;
     background-color: white;
+    table-layout:fixed;
 }
 
+
+table {
+    table-layout:fixed;
+}
 
 Footer {
 display:block;
@@ -211,6 +148,8 @@ background-color: white;
 margin: 0cm;
 }
 }
+
+
 
 /*
 i wish this required CSS was better documented :(
