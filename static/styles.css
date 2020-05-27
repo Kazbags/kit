@@ -86,25 +86,14 @@ main .form-image
         display: block;
     }
 }
-
-td {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-}
 .table table-striped
 {
     height: 100%;
     display:block;
     overflow-y:auto;
     background-color: white;
-    table-layout:fixed;
 }
 
-
-table {
-    table-layout:fixed;
-}
 
 Footer {
 display:block;
