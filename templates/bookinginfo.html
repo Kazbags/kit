@@ -36,7 +36,7 @@ window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.ke
   });
 </script>
 <script>
-  
+
 $(document).ready(function(){
     $('#notesubmit').prop('disabled',true);
     $('#notetext').keyup(function(){
@@ -195,7 +195,7 @@ $(document).ready(function(){
 
       <!-- Add note -->
       <form action="/bookinginfo/{{ bookid }}" method="post">
-        <div class="input-group mb-3" style="width:100%">
+        <div class="input-group mt-3 mb-3" style="width:100%">
           <div class="input-group-prepend">
             <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
     <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:325px" type="text" text-align="center"></textarea>

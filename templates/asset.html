@@ -23,7 +23,7 @@ $(document).ready(function(){
 {% block main %}
 
 <!-- Item header -->
-<div class="pt-3 pb-3 container" role="alert" style="background-color: rgba(0, 150, 150, 0.5)">
+<div class="pt-3 pb-3 container" style="width:100%" role="alert" style="background-color: rgba(0, 150, 150, 0.5)">
   <h5 style="color:teal">{{ item }} (1 of {{ count }})</h5>
 </div>
 
@@ -132,7 +132,7 @@ $(document).ready(function(){
 
       <!-- Add note -->
       <form action="/asset/{{ itemid }}" method="post">
-        <div class="input-group" style="width:100%">
+        <div class="mt-4 mb-3 input-group" style="width:80%">
           <div class="input-group-prepend mb-3">
             <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
     <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:325px" type="text" text-align="center"></textarea>
