@@ -40,8 +40,16 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-app = ProxyFix(app, x_for=1, x_proto=1, x_host=0,
-x_port=0, x_prefix=0)
+def _force_https():
+    # my local dev is set on debug, but on AWS it's not (obviously)
+    # I don't need HTTPS on local, change this to whatever condition you want.
+    if not app.debug:
+        from flask import _request_ctx_stack
+        if _request_ctx_stack is not None:
+            reqctx = _request_ctx_stack.top
+            reqctx.url_adapter.url_scheme = 'https'
+
+app.before_request(_force_https)
 
 # Set up database
 engine = create_engine(os.getenv("DATABASE_URL"))
