@@ -1045,11 +1045,9 @@ def register():
         hashed_password = generate_password_hash(request.form.get("password"))
 
         # Add user to database
-        result = db.execute("INSERT INTO users (username, hash, correct, time) VALUES(:username, :hash, :correct, :time)",
+        result = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)",
                 {"username": request.form.get("username"),
-                "hash": hashed_password,
-                "correct": None,
-                "time": None})
+                "hash": hashed_password})
         db.commit()
 
         rows = db.execute("SELECT * FROM users WHERE username = :username",
