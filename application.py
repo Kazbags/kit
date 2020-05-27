@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app = ProxyFix(app, x_for=1, x_host=1, x_proto=1, x_port=1)
+app = ProxyFix(kit, x_for=1, x_host=1, x_proto=1, x_port=1)
 
 scopes = 'https://www.googleapis.com/auth/calendar'
 # Ensure responses aren't cached
