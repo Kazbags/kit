@@ -34,7 +34,8 @@ def after_request(response):
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
-app.config['SECRET_KEY'] = 'super secret'
+app.config['SECRET_KEY'] = 'kitcookies123'
+
 """
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
