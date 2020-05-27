@@ -12,7 +12,7 @@
 }
 </style>
 
-<div class="container tablemobile">
+<div class="container">
  <div id="calendar"></div>
 </div>
 
@@ -34,6 +34,12 @@
     events: {{ events }},
 
   });
+
+  eventAfterAllRender: function(view) {
+         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+           $('#calendar').fullCalendar('changeView', 'agendaDay');
+         } //IF MOBILE CHANGE VIEW TO AGENDA DAY
+  
 
   calendar.render();
 });
