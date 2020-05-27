@@ -20,7 +20,8 @@ app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-app = ProxyFix(kit, x_for=1, x_host=1, x_proto=1, x_port=1)
+app = ProxyFix(app, x_for=1, x_proto=1, x_host=0,
+x_port=0, x_prefix=0)
 
 scopes = 'https://www.googleapis.com/auth/calendar'
 # Ensure responses aren't cached
@@ -34,11 +35,12 @@ def after_request(response):
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
-
+"""
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
+"""
 Session(app)
 
 
