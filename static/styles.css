@@ -90,6 +90,13 @@ main .form-image
         overflow-x: scroll;
         display: block;
     }
+    .calendar-container {
+        width: 600px;
+    }
+
+    .calendar-container .fc-view > table {
+        width: 600px;
+    }
 }
 .table table-striped
 {
@@ -100,15 +107,7 @@ main .form-image
     background-color: white;
 }
 
-.calendar-container {
-    width: 600px;
-}
 
-
-
-.calendar-container .fc-view > table {
-    width: 600px;
-}
 Footer {
 display:block;
 position: absolute;
