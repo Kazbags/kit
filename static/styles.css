@@ -50,7 +50,7 @@ main img
 
 body {
 
-  font-family: "Helvetica",Arial,Verdana,sans-serif;
+  font-family: "Helvetica",Helvetica,Arial,Verdana,sans-serif;
 
 }
 
@@ -99,6 +99,7 @@ main .form-image
     overflow-x:scroll;
     background-color: white;
 }
+
 .calendar-container {
     width: 100%;
 }
@@ -108,9 +109,8 @@ main .form-image
 }
 
 .calendar-container .fc-view > table {
-    width: 600px;
+    width: 101%;
 }
-
 Footer {
 display:block;
 position: absolute;
