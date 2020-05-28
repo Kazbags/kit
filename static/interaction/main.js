@@ -433,7 +433,7 @@ Docs & License: https://fullcalendar.io/
                 mirrorEl = this.mirrorEl = this.sourceEl.cloneNode(true); // cloneChildren=true
                 // we don't want long taps or any mouse interaction causing selection/menus.
                 // would use preventSelection(), but that prevents selectstart, causing problems.
-                mirrorEl.classList.add('fc-unselectable');
+                mirrorEl.classList.add('touchmouse-unselectable');
                 mirrorEl.classList.add('fc-dragging');
                 core.applyStyle(mirrorEl, {
                     position: 'fixed',

@@ -48,6 +48,11 @@ main img
     max-width: 100%;
 }
 
+body {
+
+  font-family: "Helvetica",Arial,Verdana,sans-serif;
+
+}
 
 #alert-light
 {
@@ -94,7 +99,17 @@ main .form-image
     overflow-x:scroll;
     background-color: white;
 }
+.calendar-container {
+    width: 100%;
+}
 
+.calendar-container .fc-view {
+    overflow-x: scroll;
+}
+
+.calendar-container .fc-view > table {
+    width: 600px;
+}
 
 Footer {
 display:block;

@@ -11,6 +11,7 @@
 body .fc {
   /* extra precedence to overcome jqui */
   font-size: 1em;
+
 }
 
 /* Colors
@@ -103,6 +104,7 @@ hr.fc-divider {
 --------------------------------------------------------------------------------------------------*/
 .fc table {
   width: 100%;
+  overflow-x: scroll;
   box-sizing: border-box;
   /* fix scrollbar issue in firefox */
   table-layout: fixed;
@@ -122,6 +124,7 @@ hr.fc-divider {
   border-width: 1px;
   padding: 0;
   vertical-align: top;
+
 }
 
 .fc td.fc-today {
@@ -176,6 +179,7 @@ a[data-goto]:hover {
 .fc-row .fc-bgevent-skeleton,
 .fc-row .fc-highlight-skeleton {
   bottom: 0;
+
   /* stretch skeleton to bottom of row */
 }
 
@@ -400,6 +404,7 @@ temporary rendered events).
 .fc-rtl .fc-h-event .fc-end-resizer {
   cursor: w-resize;
   left: -1px;
+  overflow-x: scroll;
   /* overcome border */
 }
 

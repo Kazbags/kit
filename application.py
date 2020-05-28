@@ -900,7 +900,7 @@ def calendar():
         events.append(yesevent)
 
 
-    return render_template("cal.html", events = events)
+    return render_template("calendar.php", events = events)
 
 ###----- Delete Booking ----->
 @app.route("/delete/<id>", methods=["POST"])
