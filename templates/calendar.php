@@ -29,14 +29,6 @@
       center: 'title',
       right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth'
     },
-    eventRender: function(info) {
-      var tooltip = new Tooltip(info.el, {
-        title: info.event.title,
-        placement: 'top',
-        trigger: 'hover',
-        container: 'body'
-      });
-    },
     weekNumbers: true,
     eventLimit: false, // allow "more" link when too many events
     events: {{ events }},
