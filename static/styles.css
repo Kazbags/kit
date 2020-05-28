@@ -101,7 +101,7 @@ main .form-image
 }
 
 .calendar-container {
-    width: 100%;
+    width: 480px;
 }
 
 .calendar-container .fc-view {
@@ -109,7 +109,7 @@ main .form-image
 }
 
 .calendar-container .fc-view > table {
-    width: 101%;
+    width: 600px;
 }
 Footer {
 display:block;
