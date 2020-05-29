@@ -17,11 +17,9 @@ $(document).ready(function(){
     })
 });
 </script>
-
 {% endblock %}
 
 {% block main %}
-
 <!-- Item header -->
 <div class="pt-3 pb-3 container" role="alert" style="flex:100%; background-color: rgba(0, 150, 150, 0.5)">
   <h5 style="color:teal">{{ item }} (1 of {{ count }})</h5>
@@ -99,7 +97,7 @@ $(document).ready(function(){
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Start</label>
             </div>
-            <input type="text" id="picker" class="form-control" name="start">
+            <input type="text" id="picker5" class="form-control" name="start">
             </div>
 
             <!-- End date picker -->
@@ -107,7 +105,7 @@ $(document).ready(function(){
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">End</label>
               </div>
-              <input type="text" id="picker2" class="form-control" name="end">
+              <input type="text" id="picker6" class="form-control" name="end">
               </div>
 
               <!-- send id for errorcheck re-route -->
@@ -161,12 +159,13 @@ $(document).ready(function(){
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/jquery.classyqr.js"></script>
-    <script src="/static/jquery.datetimepicker.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="/static/picker/jquery.datetimepicker.full.min.js"></script>
+<script type="text/javascript" src="/static/jquery.classyqr.js"></script>
+
     <script>
-          $('#picker').datetimepicker({
+          $('#picker5').datetimepicker({
             timepicker: true,
             datepicker: true,
             format: 'Y-m-d H:m:s',
@@ -180,7 +179,7 @@ $(document).ready(function(){
           })
     </script>
     <script>
-          $('#picker2').datetimepicker({
+          $('#picker6').datetimepicker({
             timepicker: true,
             datepicker: true,
             format: 'Y-m-d H:m:s',
@@ -199,7 +198,7 @@ $(document).ready(function() {
 $('#qr').ClassyQR({
    create: true, // signals the library to create the image tag inside the container div.
    type: 'url', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
-   url: 'http://127.0.0.1:5000/asset/{{ itemid }}' // the text to encode in the QR.
+   url: 'https://morning-shore-34495.herokuapp.com/asset/{{ itemid }}' // the text to encode in the QR.
 });
 });
 </script>

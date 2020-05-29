@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Asset
+    Booking Info
 {% endblock %}
 
 {% block script %}
@@ -43,7 +43,7 @@ $(document).ready(function(){
         $('#notesubmit').prop('disabled', this.value == "" ? true : false);
     })
 });
-</script
+</script>
 {% endblock %}
 
 {% block main %}
@@ -222,41 +222,36 @@ $(document).ready(function(){
 </div>
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/jquery.classyqr.js"></script>
-    <script src="/static/jquery.datetimepicker.full.min.js"></script>
-    <script>
-          $('#picker').datetimepicker({
-            timepicker: true,
-            datepicker: true,
-            format: 'Y-m-d H:m:s',
-            weeks: false,
-            value: '2020-5-16 9:00:00',
-            hours12: false,
-            yearStart: 2020,
-            step: 60,
-            yearEnd: 2030,
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="/static/picker/jquery.datetimepicker.full.min.js"></script>
+<script>
+      $('#picker').datetimepicker({
+        timepicker: true,
+        datepicker: true,
+        format: 'Y-m-d H:m:s',
+        weeks: false,
+        value: '2020-5-16 9:00:00',
+        hours12: false,
+        yearStart: 2020,
+        step: 60,
+        yearEnd: 2030,
 
-          })
-    </script>
-    <script>
-          $('#picker2').datetimepicker({
-            timepicker: true,
-            datepicker: true,
-            format: 'Y-m-d H:m:s',
-            weeks: false,
-            value: '2020-5-16 9:00:00',
-            hours12: false,
-            yearStart: 2020,
-            step: 60,
-            yearEnd: 2030,
+      })
+</script>
+<script>
+      $('#picker2').datetimepicker({
+        timepicker: true,
+        datepicker: true,
+        format: 'Y-m-d H:m:s',
+        weeks: false,
+        value: '2020-5-16 9:00:00',
+        hours12: false,
+        yearStart: 2020,
+        step: 60,
+        yearEnd: 2030,
 
-          })
-    </script>
-
-
-
-
+      })
+</script>
 
 {% endblock %}
