@@ -262,21 +262,6 @@ def index():
                                            venueselect=venueselect,
                                            kit=kit)
 
-        #----- QR Query ----->
-        if request.form.get("searchqr"):
-            search = request.form.get("searchqr")
-            # Add wildcard for database call
-            search = f"%{search}%"
-
-            # Search equipment for query
-            kit = db.execute("SELECT * FROM kit WHERE dept ILIKE :search OR type ILIKE :search OR item ILIKE :search OR venue ILIKE :search", {"search": search}).fetchall()
-
-            # Redirect user to QR page
-            if not kit:
-                flash('No items found')
-                return render_template("qr.html", kit = kit)
-            else:
-                return render_template("qr.html", kit = kit)
 
     else:
 
@@ -963,10 +948,28 @@ def dept(dept):
 @login_required
 def qr():
 
+    if request.method == "POST":
+        #----- QR Query ----->
+        if request.form.get("searchqr"):
+            search = request.form.get("searchqr")
+            # Add wildcard for database call
+            search = f"%{search}%"
+
+            # Search equipment for query
+            kit = db.execute("SELECT * FROM kit WHERE dept ILIKE :search OR type ILIKE :search OR item ILIKE :search OR venue ILIKE :search", {"search": search}).fetchall()
+
+            # Redirect user to QR page
+            if not kit:
+                flash('No items found')
+                return redirect("/qr")
+            else:
+                return render_template("qr.html", kit = kit)
+
     # Get asset list by latest added
     kit = db.execute("SELECT * FROM kit ORDER BY id DESC").fetchall()
 
     return render_template("qr.html", kit = kit)
+
 
 """ Login/Logout """
 
