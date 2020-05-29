@@ -12,7 +12,7 @@
         ClassyQR: function (x) {
             var c = {
                 baseUrl: 'http://chart.apis.google.com/chart?cht=qr&chs=',
-                size: 230,
+                size: 150,
                 create: false,
                 number: null,
                 email: null,
