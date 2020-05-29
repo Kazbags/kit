@@ -126,14 +126,50 @@ $(document).ready(function(){
 </div>
     <!-- Notes -->
     <div class="col" style="flex: 40%">
+      <!-- Booking table -->
+      <div class="dropdown show">
+        <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="bookings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bookings
+        </a>
+      <table class="table table-striped tablemobile" id="bookingtable">
+              <thead>
+                  <tr>
+                      <th hidden>ID</th>
+                      <th>Quantity</th>
+                      <th>Item</th>
+                      <th>From</th>
+                      <th>To</th>
+                      <th>Event</th>
+                      <th>Venue</th>
+
+                  </tr>
+              </thead>
+
+              <tbody>
+                      {% for dict_item in assbook %}
+                      <tr>
+                              {% for i in range (1,7) %}
+                              <td><a href="{{ url_for('bookinginfo', id=dict_item['id']) }}">
+                              {{ dict_item[i] }}</a></td>
+                              {% endfor %}
+                      </tr>
+                      {% endfor %}
+              </tbody>
+          </table>
+          </div>
+          <div class="dropdown show">
+            <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Notes
+            </a>
+            <div class="container" id="notetext">
       <div class="mt-0 mb-4 row align-items-center">
 
       <!-- Add note -->
       <form action="/asset/{{ itemid }}" method="post">
         <div class="mt-4 mb-3 input-group" style="width:300px">
           <div class="input-group-prepend mb-3">
-            <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
-    <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
+            <button class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
+    <textarea class="form-control" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
   </div>
   </form>
   </div>
@@ -154,6 +190,8 @@ $(document).ready(function(){
                     {% endfor %}
             </tbody>
         </table>
+        </div>
+        </div>
         </div>
 </div>
 
@@ -204,6 +242,34 @@ $('#qr').ClassyQR({
 });
 </script>
 
+<script>
+var button = document.getElementById('bookings'); // Assumes element with id='button'
 
+button.onclick = function() {
+    var div = document.getElementById('bookingtable');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'table';
+
+    }
+};
+</script>
+
+<script>
+var button = document.getElementById('notes'); // Assumes element with id='button'
+
+button.onclick = function() {
+    var div = document.getElementById('notetext');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'table';
+
+    }
+};
+</script>
 
 {% endblock %}

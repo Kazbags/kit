@@ -320,6 +320,11 @@ def asset(id):
     #Get notes
     notes = db.execute("SELECT notes, noteadded FROM notes WHERE itemid = :id ORDER BY id DESC", {"id": itemid}).fetchall()
 
+    #Get today
+    today = datetime.today().strftime('%Y-%m-%d')
+    #Get item bookings
+    assbook = db.execute("SELECT id, quantity, item, start, endtime, event, venue FROM bookings WHERE endtime >= :today AND item = :item", {"item": item, "today": today}).fetchall()
+
     #----- Add Note ----->
     if request.method == "POST":
 
@@ -342,7 +347,7 @@ def asset(id):
             return redirect(url_for('asset', id=itemid))
     else:
 
-        return render_template("asset.html", notes = notes, item = item, count = count, venue = venue, itemid=itemid, venueselect=venueselect)
+        return render_template("asset.html", notes = notes, item = item, count = count, venue = venue, itemid=itemid, venueselect=venueselect, assbook=assbook)
 
 ###----- Add Asset ----->
 @app.route("/add", methods=["GET", "POST"])
@@ -740,6 +745,17 @@ def bookinginfo(id):
     default_types = type
     default_items = item
 
+    time = db.execute("SELECT start, endtime FROM bookings WHERE id = :id", {"id": bookid}).fetchone()
+    start = time['start']
+    end = time['endtime']
+    startdate = start.date()
+    print(startdate)
+    starttime = start.time()
+    print(starttime)
+    enddate = end.date()
+    print(enddate)
+    endtime = end.time()
+    print(endtime)
     return render_template('bookinginfo.html',
                            all_depts=default_depts,
                            all_types=default_types,
@@ -748,7 +764,9 @@ def bookinginfo(id):
                            booking=booking,
                            venueselect=venueselect,
                            venue=venue, item=item,
-                           event=event, quantity=quantity, booker=booker)
+                           event=event, quantity=quantity, booker=booker,
+                           starttime=starttime, startdate=startdate,
+                           endtime=endtime, enddate=enddate)
 
 ###----- Calendar Events ----->
 @app.route("/calendar", methods=["GET", "POST"])
