@@ -455,6 +455,9 @@ def deleteitem(id):
 def addbooking():
 
     #----- Get booking form input ----->
+    id = session["user_id"]
+    b = db.execute("SELECT username FROM users WHERE id = :id", {"id": id}).fetchall()
+    user= b[0]['username']
     # Hidden id form input for redirect back to booking page - from "itemid" jinja
     id = request.form.get("id")
     # Get department item - type not used, but needed for dropdown dependencies
@@ -468,7 +471,7 @@ def addbooking():
     event = request.form.get("event")
     venue = request.form.get("venue")
     # Booker
-    booker = request.form.get("booker")
+    booker = user
     # Quantity
     quantity = request.form.get("howmany")
     # Today

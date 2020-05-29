@@ -222,19 +222,19 @@ $(document).ready(function(){
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 <script src="/static/picker/jquery.datetimepicker.full.min.js"></script>
 <script>
       $('#picker').datetimepicker({
         timepicker: true,
         datepicker: true,
         format: 'Y-m-d H:m:s',
+        formatTime:	'H:i',
         weeks: false,
-        value: '2020-5-16 9:00:00',
+        value: '2020-4-16 9:00:00',
+        defaultTime: '08:00',
         hours12: false,
         yearStart: 2020,
-        step: 60,
         yearEnd: 2030,
 
       })
@@ -244,11 +244,12 @@ $(document).ready(function(){
         timepicker: true,
         datepicker: true,
         format: 'Y-m-d H:m:s',
+        formatTime:	'H:i',
         weeks: false,
-        value: '2020-5-16 9:00:00',
+        value: '2020-4-16 9:00:00',
+        defaultTime: '17:00',
         hours12: false,
         yearStart: 2020,
-        step: 60,
         yearEnd: 2030,
 
       })

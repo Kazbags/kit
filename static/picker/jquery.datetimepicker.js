@@ -2686,5 +2686,3 @@ var datetimepickerFactory = function ($) {
 		factory(jQuery);
 	}
 }(datetimepickerFactory));
-
-
