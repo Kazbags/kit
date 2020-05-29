@@ -127,7 +127,7 @@ $(document).ready(function(){
     <!-- Notes -->
     <div class="col" style="flex: 40%">
       <!-- Booking table -->
-      <div class="dropdown show">
+      <div {{ hide }} class="dropdown show">
         <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="bookings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Bookings
         </a>
@@ -176,16 +176,22 @@ $(document).ready(function(){
     <table  class="table table-striped">
             <thead>
                 <tr>
+                    <th hidden>id</th>
                     <th>Notes</th>
                     <th style="width: 30%">Added</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                     {% for dict_item in notes %}
                     <tr>
-                        {% for key, value in dict_item.items() %}
+                        {% for key, value in dict_item.items()[1:] %}
                             <td>{{ value }}</td>
                             {% endfor %}
+                            <td>
+                              <form action="/asset/{{ itemid }}" method="post">
+                              <button class="btn btn-info btn-sm" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
+                            </form></td>
                     </tr>
                     {% endfor %}
             </tbody>
@@ -198,14 +204,14 @@ $(document).ready(function(){
 
 
 
-<script src="/static/picker/jquery.datetimepicker.full.min.js"></script>
+
 <script type="text/javascript" src="/static/jquery.classyqr.js"></script>
 
     <script>
           $('#picker5').datetimepicker({
             timepicker: true,
             datepicker: true,
-            format: 'Y-m-d H:m:s',
+            format: 'Y-m-d H:i:s',
             formatTime:	'H:i',
             weeks: false,
             value: '2020-4-16 9:00:00',
@@ -220,7 +226,7 @@ $(document).ready(function(){
           $('#picker6').datetimepicker({
             timepicker: true,
             datepicker: true,
-            format: 'Y-m-d H:m:s',
+            format: 'Y-m-d H:i:s',
             formatTime:	'H:i',
             weeks: false,
             value: '2020-4-16 9:00:00',

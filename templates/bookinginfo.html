@@ -205,16 +205,22 @@ $(document).ready(function(){
     <table class="table table-striped tablemobile">
             <thead>
                 <tr>
+                    <th hidden>id</th>
                     <th>Notes</th>
                     <th style="width: 30%">Added</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                     {% for dict_item in notes %}
                     <tr>
-                        {% for key, value in dict_item.items() %}
+                        {% for key, value in dict_item.items()[1:] %}
                             <td>{{ value }}</td>
                             {% endfor %}
+                            <td>
+                              <form action="/bookinginfo/{{ bookid }}" method="post">
+                              <button class="btn btn-info btn-sm" type="submit" value = "{{ dict_item['id'] }}" name = "delete" onclick="return confirm('Are you Sure?')">Delete</button>
+                            </form></td>
                     </tr>
                     {% endfor %}
             </tbody>
@@ -223,15 +229,15 @@ $(document).ready(function(){
 
 
 
-<script src="/static/picker/jquery.datetimepicker.full.min.js"></script>
+
 <script>
       $('#picker').datetimepicker({
         timepicker: true,
         datepicker: true,
-        format: 'Y-m-d H:m:s',
+        format: 'Y-m-d H:i:s',
         formatTime:	'H:i',
         weeks: false,
-        value: '2020-4-16 9:00:00',
+        value: '{{ start }}',
         defaultTime: '{{ starttime }}',
         defaultDate: '{{ startdate }}',
         hours12: false,
@@ -244,10 +250,10 @@ $(document).ready(function(){
       $('#picker2').datetimepicker({
         timepicker: true,
         datepicker: true,
-        format: 'Y-m-d H:m:s',
+        format: 'Y-m-d H:i:s',
         formatTime:	'H:i',
         weeks: false,
-        value: '2020-4-16 9:00:00',
+        value: '{{ end }}',
         defaultTime: '{{ endtime }}',
         defaultDate: '{{ enddate }}',
         hours12: false,

@@ -318,17 +318,31 @@ def asset(id):
     count = c[0][0]
 
     #Get notes
-    notes = db.execute("SELECT notes, noteadded FROM notes WHERE itemid = :id ORDER BY id DESC", {"id": itemid}).fetchall()
+    notes = db.execute("SELECT id, notes, noteadded FROM notes WHERE itemid = :id ORDER BY id DESC", {"id": itemid}).fetchall()
 
     #Get today
     today = datetime.today().strftime('%Y-%m-%d')
     #Get item bookings
     assbook = db.execute("SELECT id, quantity, item, start, endtime, event, venue FROM bookings WHERE endtime >= :today AND item = :item", {"item": item, "today": today}).fetchall()
 
+    #hide booking table if none
+    if not assbook:
+        hide = 'hidden'
+    else:
+        hide = ''
+
     #----- Add Note ----->
     if request.method == "POST":
 
-        #Note submitted
+        #----- Delete Note ----->
+        if request.form.get("delete"):
+            delete = request.form.get("delete")
+            db.execute("DELETE FROM notes WHERE id = :id", {"id": delete})
+            db.commit()
+
+            return redirect(url_for('asset', id=itemid))
+
+        #----- Add Note ----->
         if request.form.get("note"):
             note = request.form.get("note")
 
@@ -347,7 +361,7 @@ def asset(id):
             return redirect(url_for('asset', id=itemid))
     else:
 
-        return render_template("asset.html", notes = notes, item = item, count = count, venue = venue, itemid=itemid, venueselect=venueselect, assbook=assbook)
+        return render_template("asset.html", notes = notes, item = item, count = count, venue = venue, itemid=itemid, venueselect=venueselect, assbook=assbook, hide=hide)
 
 ###----- Add Asset ----->
 @app.route("/add", methods=["GET", "POST"])
@@ -647,6 +661,14 @@ def bookinginfo(id):
     bookid = id
 
     if request.method == "POST":
+        #----- Delete Note ----->
+        if request.form.get("delete"):
+            delete = request.form.get("delete")
+            db.execute("DELETE FROM bookingnotes WHERE id = :id", {"id": delete})
+            db.commit()
+
+            return redirect(url_for('bookinginfo', id=bookid))
+
         #----- Add Note ----->
         if request.form.get("note"):
             # Get new note
@@ -718,7 +740,7 @@ def bookinginfo(id):
     #----- Booking info ----->
     bookid = id
     # Get notes list
-    notes = db.execute("SELECT notes, noteadded FROM bookingnotes WHERE bookingid = :id ORDER BY id DESC", {"id": bookid}).fetchall()
+    notes = db.execute("SELECT  id, notes, noteadded FROM bookingnotes WHERE bookingid = :id ORDER BY id DESC", {"id": bookid}).fetchall()
     # Get booking info
     booking = db.execute("SELECT * FROM Bookings WHERE id = :id", {"id": bookid}).fetchone()
 
@@ -745,6 +767,7 @@ def bookinginfo(id):
     default_types = type
     default_items = item
 
+    #Get booking times
     time = db.execute("SELECT start, endtime FROM bookings WHERE id = :id", {"id": bookid}).fetchone()
     start = time['start']
     end = time['endtime']
@@ -766,7 +789,8 @@ def bookinginfo(id):
                            venue=venue, item=item,
                            event=event, quantity=quantity, booker=booker,
                            starttime=starttime, startdate=startdate,
-                           endtime=endtime, enddate=enddate)
+                           endtime=endtime, enddate=enddate,
+                           start=start, end=end)
 
 ###----- Calendar Events ----->
 @app.route("/calendar", methods=["GET", "POST"])
