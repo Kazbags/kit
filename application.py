@@ -840,11 +840,10 @@ def calendar():
           }
         events.append(event)
 
-    """MAKE THIS BETTER"""
 
     #----- Theatre YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3A%20PT?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Apt%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
@@ -873,7 +872,7 @@ def calendar():
 
     #----- Studio YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3A%20studio?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Astudio%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
@@ -902,7 +901,7 @@ def calendar():
 
     #----- Gannochy YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3A%20gannochy?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Agannochy%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
