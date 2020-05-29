@@ -21,14 +21,14 @@ $(document).ready(function(){
 
 {% block main %}
 <!-- Item header -->
-<div class="pt-3 pb-3 container" role="alert" style="flex:100%; background-color: rgba(0, 150, 150, 0.5)">
-  <h5 style="color:teal">{{ item }} (1 of {{ count }})</h5>
+<div class="roundbox" style="flex:100%; background-color:rgba(0, 150, 150, 0.3)">
+  <h5 class="pt-2" style="color:teal">{{ item }} (1 of {{ count }})</h5>
 </div>
 
 <!-- Delete -->
 <div class="row">
 <div class="col">
-<div class="roundbox">
+<div class="mb-3 roundbox">
   <form action="/deleteitem/{{ itemid }}" method="post">
   <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-4 mb-4 btn btn-outline-info">Delete Item</button>
   </form>
@@ -120,7 +120,7 @@ $(document).ready(function(){
     </div>
 
     <!-- QR Code -->
-    <div class="qrcode" id="qr">
+    <div class=" mt-2 mb-2 qrcode" id="qr">
       </div>
 </div>
 </div>
@@ -169,12 +169,12 @@ $(document).ready(function(){
         <div class="mt-4 mb-3 input-group" style="width:300px">
           <div class="input-group-prepend mb-3">
             <button class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
-    <textarea class="form-control" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
+    <textarea class="form-control" rows="2" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
   </div>
   </form>
   </div>
     <table  class="table table-striped">
-            <thead>
+            <thead style="background-color:rgba(0, 150, 150, 0.3)">
                 <tr>
                     <th hidden>id</th>
                     <th>Notes</th>

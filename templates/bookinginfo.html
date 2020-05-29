@@ -48,9 +48,13 @@ $(document).ready(function(){
 
 {% block main %}
 <!-- Booking info -->
-<table class="table table-striped tablemobile">
-        <thead style="background-color:rgba(0, 150, 150, 0.5)">
-            <tr style="font-size:14px">
+<div class="dropdown show">
+  <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="booking" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Booking
+  </a>
+<table class="table table-striped tablemobile" id="bookingtable">
+        <thead style="background-color:rgba(0, 150, 150, 0.3)">
+            <tr style="font-size:13px">
                 <th>ID</th>
                 <th>Department</th>
                 <th>Quantity</th>
@@ -71,12 +75,12 @@ $(document).ready(function(){
                 </tr>
         </tbody>
     </table>
-
+</div>
 
 <!-- Edit/Delete -->
 <div class="row">
 <div class="col">
-  <div class="roundbox">
+  <div class="mb-3 roundbox">
 
   <form action="/delete/{{ bookid }}" method="post">
   <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-4 mb-4 btn btn-outline-info">Delete Booking</button>
@@ -137,8 +141,11 @@ $(document).ready(function(){
             </div>
 
           <!-- How many -->
-          <div class="form-group">
-          <input autocomplete="off" class="form-control" name="howmany" spellcheck="true" placeholder="How Many?" style="width:250px" value="{{ quantity }}" type="text" text-align="center">
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01" style="font-size:14px">Quantity</label>
+            </div>
+          <input autocomplete="off" class="form-control" name="howmany" spellcheck="true" placeholder="How Many?" value="{{ quantity }}" type="text" text-align="center">
           </div>
 
           <!-- venue -->
@@ -157,12 +164,18 @@ $(document).ready(function(){
             </select>
           </div>
           <!-- Event -->
-          <div class="form-group">
-          <input autocomplete="off" class="form-control" name="event" spellcheck="true" placeholder="Event" value="{{ event }}" style="width:250px" type="text">
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Event</label>
+            </div>
+          <input autocomplete="off" class="form-control" name="event" spellcheck="true" placeholder="Event" value="{{ event }}"  type="text">
           </div>
           <!-- Booker -->
-          <div class="form-group">
-          <input autocomplete="off" class="form-control" name="booker" spellcheck="true" placeholder="Booked by" value="{{ booker }}" style="width:250px" type="text">
+          <div class="input-group mb-3" style="width:250px">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">By</label>
+            </div>
+          <input autocomplete="off" class="form-control" name="booker" spellcheck="true" placeholder="Booked by" value="{{ booker }}" type="text">
           </div>
 
           <!-- Start date picker -->
@@ -194,16 +207,21 @@ $(document).ready(function(){
       <div class="mt-0 mb-4 row align-items-center">
 
       <!-- Add note -->
+      <div class="dropdown show" style="flex:100%">
+        <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Notes
+        </a>
+        <div class="container" id="notestable">
       <form action="/bookinginfo/{{ bookid }}" method="post">
         <div class="input-group mt-3 mb-3" style="width:300px">
           <div class="input-group-prepend">
             <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
-    <textarea class="form-control" id="notetext" rows="3" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
+    <textarea class="form-control" id="notetext" rows="2" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
   </div>
   </form>
   </div>
     <table class="table table-striped tablemobile">
-            <thead>
+            <thead style="background-color:rgba(0, 150, 150, 0.3)">
                 <tr>
                     <th hidden>id</th>
                     <th>Notes</th>
@@ -225,6 +243,8 @@ $(document).ready(function(){
                     {% endfor %}
             </tbody>
         </table>
+        </div>
+        </div>
 </div>
 
 
@@ -261,6 +281,36 @@ $(document).ready(function(){
         yearEnd: 2030,
 
       })
+</script>
+
+<script>
+var button = document.getElementById('booking'); // Assumes element with id='button'
+
+button.onclick = function() {
+    var div = document.getElementById('bookingtable');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'table';
+
+    }
+};
+</script>
+
+<script>
+var button = document.getElementById('notes'); // Assumes element with id='button'
+
+button.onclick = function() {
+    var div = document.getElementById('notestable');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'table';
+
+    }
+};
 </script>
 
 {% endblock %}
