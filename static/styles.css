@@ -94,6 +94,9 @@ main .form-image
         overflow-x: scroll;
         display: block;
     }
+    .delete {
+      display: none;
+    }
     .calendar-container {
         width: 600px;
     }
