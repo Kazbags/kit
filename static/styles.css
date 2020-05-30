@@ -109,9 +109,13 @@ main .form-image
     }
     .col {
         display: inline;
+        flex: 20%;
+        padding: 10px;
     }
     .row {
           display: inline;
+          display: flex;
+          justify-content: center;
     }
 }
 .table table-striped
