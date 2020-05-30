@@ -53,7 +53,7 @@ $(document).ready(function(){
     Booking
   </a>
 <table class="table table-striped tablemobile" id="bookingtable">
-        <thead style="background-color:rgba(0, 150, 150, 0.3)">
+        <thead style="background-color:rgba(0, 150, 150, 0.2)">
             <tr style="font-size:13px">
                 <th>ID</th>
                 <th>Department</th>
@@ -77,10 +77,23 @@ $(document).ready(function(){
     </table>
 </div>
 
-<!-- Edit/Delete -->
+
 <div class="row">
+  <!-- Edit/Delete -->
 <div class="col">
-  <div class="mb-3 roundbox">
+  <div class="mb-3 roundbox" style="background-color:rgba(0, 150, 150, 0.1)">
+    <!-- Add Note -->
+    <div class="mt-0 mb-1 row align-items-center">
+    <form action="/bookinginfo/{{ bookid }}" method="post">
+      <div class="input-group mt-3">
+        <div class="input-group-prepend">
+          <button id="notesubmit" class="btn btn-outline-info" type="submit">Add</button>
+  <textarea class="form-control" id="notetext" rows="2" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:175px" type="text" text-align="center"></textarea>
+</div>
+</div>
+</form>
+</div>
+
 
   <form action="/delete/{{ bookid }}" method="post">
   <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-4 mb-4 btn btn-outline-info">Delete Booking</button>
@@ -204,29 +217,21 @@ $(document).ready(function(){
     </div>
     </div>
     <div class="col" style="flex: 40%">
-      <div class="mt-0 mb-4 row align-items-center">
+
 
       <!-- Add note -->
-      <div class="dropdown show" style="flex:100%">
+      <div class="dropdown show">
         <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Notes
         </a>
-        <div class="container" id="notestable">
-      <form action="/bookinginfo/{{ bookid }}" method="post">
-        <div class="input-group mt-3 mb-3" style="width:300px">
-          <div class="input-group-prepend">
-            <button id="notesubmit" class="btn btn-outline-info" style="width:75px" type="submit">Add</button>
-    <textarea class="form-control" id="notetext" rows="2" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" style="width:225px" type="text" text-align="center"></textarea>
-  </div>
-  </form>
-  </div>
-    <table class="table table-striped tablemobile">
-            <thead style="background-color:rgba(0, 150, 150, 0.3)">
+
+    <table class="table table-striped tablemobile" id="notestable">
+            <thead style="background-color:rgba(0, 150, 150, 0.2)">
                 <tr>
                     <th hidden>id</th>
-                    <th>Notes</th>
+                    <th style="width: 60%">Notes</th>
                     <th style="width: 30%">Added</th>
-                    <th class="delete"></th>
+                    <th style="width: 10%" class="delete"></th>
                 </tr>
             </thead>
             <tbody>
@@ -244,7 +249,7 @@ $(document).ready(function(){
             </tbody>
         </table>
         </div>
-        </div>
+
 </div>
 
 
