@@ -235,7 +235,7 @@ $(document).ready(function(){
                         {% for key, value in dict_item.items()[1:] %}
                             <td>{{ value }}</td>
                             {% endfor %}
-                            <td class= "delete">
+                            <td class="delete">
                               <form action="/bookinginfo/{{ bookid }}" method="post">
                               <button class="btn btn-info btn-sm py-0" style="font-size: 0.8em;" type="submit" value = "{{ dict_item['id'] }}" name = "delete" onclick="return confirm('Are you Sure?')">Delete</button>
                             </form></td>

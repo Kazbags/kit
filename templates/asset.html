@@ -182,7 +182,7 @@ $(document).ready(function(){
                     <th hidden>id</th>
                     <th style="width: 70%">Notes</th>
                     <th style="width: 25%">Added</th>
-                    <th style="width: 05%"></th>
+                    <th style="width: 05%" class="delete"></th>
                 </tr>
             </thead>
             <tbody>
@@ -191,7 +191,7 @@ $(document).ready(function(){
                         {% for key, value in dict_item.items()[1:] %}
                             <td>{{ value }}</td>
                             {% endfor %}
-                            <td>
+                            <td class="delete">
                               <form action="/asset/{{ itemid }}" method="post">
                               <button class="btn btn-info btn-sm py-0" style="font-size: 0.8em;" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
                             </form></td>
