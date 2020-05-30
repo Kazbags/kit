@@ -108,11 +108,10 @@ main .form-image
         width: 600px;
     }
     .col {
-        display: block;
+        display: inline-block;
     }
     .row {
-      .col {
-          display: block;
+          display: inline-block;
     }
 }
 .table table-striped
