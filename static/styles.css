@@ -108,10 +108,10 @@ main .form-image
         width: 600px;
     }
     .col {
-        display: inline-block;
+        display: inline;
     }
     .row {
-          display: inline-block;
+          display: inline;
     }
 }
 .table table-striped
