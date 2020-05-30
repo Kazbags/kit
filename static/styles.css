@@ -108,6 +108,12 @@ main .form-image
         width: 600px;
     }
 
+    .row .col {
+    position: relative;
+    float: none;
+    width: 100%;
+    padding:0;
+    }
 
 }
 .table table-striped
@@ -150,7 +156,7 @@ button{font-size:40px; line-height:60px;}
 font-size:13px;
 }
 .btn-outline-primary{
-font-size:13px;  
+font-size:13px;
 }
 
 .roundbox {
