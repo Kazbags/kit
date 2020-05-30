@@ -104,13 +104,13 @@ main .form-image
     .calendar-container .fc-view > table {
         width: 600px;
     }
-    @media screen and (max-width: 768px) {
+    
 	  body {
 		margin-left: 0px;
 		margin-right: 0px;
 	}
 
-}
+
 }
 .table table-striped
 {
