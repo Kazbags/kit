@@ -169,6 +169,8 @@ $(document).ready(function(){
               </tbody>
           </table>
           </div>
+
+
           <div class="dropdown show">
             <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Notes
@@ -191,7 +193,7 @@ $(document).ready(function(){
                             {% endfor %}
                             <td>
                               <form action="/asset/{{ itemid }}" method="post">
-                              <button class="btn btn-info btn-sm" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
+                              <button class="btn btn-info btn-sm py-0" style="font-size: 0.8em;" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
                             </form></td>
                     </tr>
                     {% endfor %}
