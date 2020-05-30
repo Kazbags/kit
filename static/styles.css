@@ -107,6 +107,15 @@ main .form-image
     .calendar-container .fc-view > table {
         width: 600px;
     }
+    .mobilewrapper{width:100%!important; height:auto!important;}
+.w320{width:320px!important; height:auto!important;}
+.colsplit{width:320px!important; float:left!important; display:block!important;}
+.colsplit-top{width:320px!important; display:table-caption !important;}
+.colsplit-middle{width:320px!important; display:table-header-group!important;}
+.colsplit-bottom{width:320px!important; display:table-footer-group!important;}
+
+
+}
 }
 .table table-striped
 {
