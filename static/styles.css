@@ -89,7 +89,6 @@ main .form-image
     .tablemobile {
         overflow-x: scroll;
         display: block;
-        table-layout:fixed;
     }
     #notetext {
         overflow-x: scroll;
@@ -105,6 +104,13 @@ main .form-image
     .calendar-container .fc-view > table {
         width: 600px;
     }
+    @media screen and (max-width: 768px) {
+	  body {
+		padding-left: 25px;
+		padding-right: 25px;
+	}
+
+}
 }
 .table table-striped
 {
