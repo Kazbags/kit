@@ -89,6 +89,7 @@ main .form-image
     .tablemobile {
         overflow-x: scroll;
         display: block;
+        table-layout:fixed;
     }
     #notetext {
         overflow-x: scroll;
