@@ -90,6 +90,10 @@ main .form-image
         overflow-x: scroll;
         display: block;
     }
+    #notetext {
+        overflow-x: scroll;
+        display: block;
+    }
     .calendar-container {
         width: 600px;
     }
