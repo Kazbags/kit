@@ -107,8 +107,12 @@ main .form-image
     .calendar-container .fc-view > table {
         width: 600px;
     }
-    .block {
+    .col {
         display: block;
+    }
+    .row {
+      .col {
+          display: block;
     }
 }
 .table table-striped
