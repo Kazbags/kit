@@ -21,32 +21,32 @@ $(document).ready(function(){
 
 {% block main %}
 <!-- Item header -->
-<div class="roundbox" style="flex:100%; background-color:rgba(0, 150, 150, 0.3)">
-  <h5 class="pt-2" style="color:teal">{{ item }} (1 of {{ count }})</h5>
+<div class="roundbox" style="flex:100%; background-color:#006685">
+  <h6 class="pt-2" style="color:white">{{ item }} (1 of {{ count }})</h6>
 </div>
 
 <!-- Delete -->
 <div class="row">
 <div class="col">
-<div class="mb-2 roundbox" style="background-color:rgba(0, 150, 150, 0.1)">
+<div class="mb-2 roundbox" >
   <div class="mt-0 mb-1 row align-items-center">
 
   <!-- Add note -->
   <form action="/asset/{{ itemid }}" method="post">
     <div class="mt-3 mb-2 input-group">
       <div class="input-group-prepend mb-1">
-        <button class="btn btn-outline-info" type="submit">Add</button>
-<textarea class="form-control" rows="2" autocomplete="off" name="note" spellcheck="true" placeholder="Add note" type="text" style="width:175px" text-align="center"></textarea>
+        <button class="btn btn-outline-primary" type="submit">Add</button>
+<textarea class="form-control" rows="2" autocomplete="off" name="note" spellcheck="true" style="font-size:13px" placeholder="Add note" type="text" style="width:175px" text-align="center"></textarea>
 </div>
 </div>
 </form>
 </div>
   <form action="/deleteitem/{{ itemid }}" method="post">
-  <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-1 mb-4 btn btn-outline-info">Delete Item</button>
+  <button type="submit" name="delete" onclick="return confirm('Are you Sure?')" class="mt-1 mb-4 btn btn-outline-primary">Delete Item</button>
   </form>
 
 <!-- Book item -->
-  <button type="button" class="mb-1 btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+  <button type="button" class="mb-1 btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal">
     Book Item
   </button>
 
@@ -124,7 +124,7 @@ $(document).ready(function(){
             <input type="text" hidden value="{{ itemid }}" class="form-control" name="id">
 
             <!-- Submit -->
-          <button class="btn btn-info" type="submit">Submit</button>
+          <button class="btn btn-primary" type="submit">Submit</button>
           </form>
           </div>
         </div>
@@ -140,7 +140,7 @@ $(document).ready(function(){
     <div class="col" style="flex: 40%">
       <!-- Booking table -->
       <div {{ hide }} class="dropdown show">
-        <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="bookings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle" style="width:100%" href="#" role="button" id="bookings" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Bookings
         </a>
       <table class="table table-striped tablemobile" id="bookingtable">
@@ -172,12 +172,12 @@ $(document).ready(function(){
 
 
           <div class="dropdown show">
-            <a class="btn btn-info dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-primary dropdown-toggle" style="width:100%" href="#" role="button" id="notes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Notes
             </a>
 
     <table  class="table table-striped tablemobile" id="notetext">
-            <thead style="background-color:rgba(0, 150, 150, 0.2)">
+            <thead>
                 <tr>
                     <th hidden>id</th>
                     <th style="width: 60%">Notes</th>
@@ -193,7 +193,7 @@ $(document).ready(function(){
                             {% endfor %}
                             <td class="delete">
                               <form action="/asset/{{ itemid }}" method="post">
-                              <button class="btn btn-info btn-sm py-0" style="font-size: 0.8em;" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
+                              <button class="btn btn-primary btn-sm py-0" style="font-size: 0.8em;" type="submit" value = "{{ dict_item['id'] }}" name="delete" onclick="return confirm('Are you Sure?')">Delete</button>
                             </form></td>
                     </tr>
                     {% endfor %}

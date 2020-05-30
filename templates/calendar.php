@@ -6,7 +6,7 @@
 {% endblock %}
 {% block head %}
 <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
-<link href='/static/theme/bootstrap.min.css' rel='stylesheet'>
+
 {% endblock %}
 {% block main %}
 <style>

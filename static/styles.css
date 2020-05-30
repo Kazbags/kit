@@ -1,4 +1,4 @@
-a { color: darkcyan; }
+a { color: steelblue; }
 
 nav .navbar-brand
 {
@@ -51,6 +51,9 @@ main img
 body {
 
   font-family: "Helvetica",Helvetica,Arial,Verdana,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-variant: normal;
 
 }
 
@@ -105,11 +108,6 @@ main .form-image
         width: 600px;
     }
 
-	  body {
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-
 
 }
 .table table-striped
@@ -140,17 +138,24 @@ text-align: center;
 .input-group-text
 {
     width:75px;
+    font-size:13px;
 }
-
+textarea{
+  font-size:13px;
+}
 button{font-size:40px; line-height:60px;}
 
-.input-group-prepend, .btn-outline-info{
-background-color: white;
+.input-group-prepend, .btn-primary{
+
+font-size:13px;
+}
+.btn-outline-primary{
+font-size:13px;  
 }
 
 .roundbox {
-  border: 1px solid lightseagreen;
-  border-radius: 10px;
+  border: 1px solid steelblue;
+
 }
 @media print
 {

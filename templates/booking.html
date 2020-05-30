@@ -46,12 +46,12 @@ $(document).ready(function(){
 {% endblock %}
 
 {% block main %}
-<div class="container" role="alert" style="background-color: rgba(0, 150, 150, 0.5)">
+<div class="container" role="alert" style="background-color:#006685">
   <div class="mb-2 row align-items-center">
   <div class="mb-0 mt-3 row">
   <div class="col">
 <!-- Button trigger modal -->
-<button type="button" class="mb-3 btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="mb-3 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add Booking
 </button>
 </div>
@@ -59,9 +59,9 @@ $(document).ready(function(){
 <form action="/booking" method="post">
   <div class="input-group mb-3" style="width:250px">
     <div class="input-group-prepend">
-      <button id="filtersubmit" class="btn btn-outline-info" type="submit">Filter</button>
+      <button id="filtersubmit" class="btn btn-primary" type="submit">Filter</button>
       </div>
-            <input autocomplete="off" id="filtertext" class="form-control" name="search" spellcheck="true" placeholder="Filter bookings..." type="text">
+            <input autocomplete="off" id="filtertext" class="form-control" name="search" spellcheck="true" style="font-size:13px;" placeholder="Filter bookings..." type="text">
         </div>
     </form>
     </div>
@@ -160,7 +160,7 @@ $(document).ready(function(){
             </div>
 
           <!-- Sumbit -->
-        <button class="btn btn-info" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
     </div>

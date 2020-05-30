@@ -79,12 +79,12 @@ $(document).ready(function(){
 
 {% block main %}
 <!-- Filter and Add header -->
-<div class="container" role="alert" style="flex:100%; background-color: rgba(0, 150, 150, 0.5)">
+<div class="container" role="alert" style="flex:100%; background-color:#006685">
   <div class="mb-2 row align-items-center">
 <div class="mb-0 mt-3 row">
   <div class="col">
 <!-- Button trigger modal -->
-<button type="button" class="mb-3 btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="mb-3 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Add Items
 </button>
 </div>
@@ -92,9 +92,9 @@ $(document).ready(function(){
     <form action="/" method="post">
       <div class="input-group mb-3" style="width:250px">
         <div class="input-group-prepend">
-          <button id="filtersubmit" class="btn btn-outline-info" type="submit">Filter</button>
+          <button id="filtersubmit" class="btn btn-primary" type="submit">Filter</button>
           </div>
-                <input autocomplete="off" id="filtertext" class="form-control" name="search" spellcheck="true" placeholder="Filter assets..." type="text">
+                <input autocomplete="off" id="filtertext" class="form-control" name="search" spellcheck="true" style="font-size:13px" placeholder="Filter assets..." type="text">
             </div>
         </form>
 </div>
@@ -181,7 +181,7 @@ $(document).ready(function(){
         <input autocomplete="off" class="form-control" name="howmany" spellcheck="true" placeholder="How Many?" style="width:125px" type="text" text-align="center">
         </div>
         <!-- Submit -->
-        <button class="btn btn-info" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
         </form>
       </div>
     </div>
