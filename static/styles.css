@@ -111,11 +111,7 @@ main .form-image
         display: inline-block;
         padding: 10px;
     }
-    .row {
-          display: inline;
-          justify-content: center;
-    }
-}
+
 .table table-striped
 {
     height: 100%;
