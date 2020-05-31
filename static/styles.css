@@ -114,24 +114,19 @@ main .form-image
           justify-content: center;
     }
 }
-/* !important is needed sometimes */
+
 ::-webkit-scrollbar {
-   width: 12px !important;
-   -webkit-overflow-scrolling: auto;
+
+  width: 10px;
+  -webkit-overflow-scrolling: auto;
 }
 
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px !important;
-  border-radius: 10px !important;
+  border-radius: 5px;
   background-color: rgba(0, 102, 133,.5);
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5) !important;
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
 
-}
-::-webkit-scrollbar-thumb:window-inactive {
-  background: #41617D !important;
-}
 
 @media only screen and (max-width: 480px){
   .delete {
