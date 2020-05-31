@@ -83,16 +83,15 @@ $(document).ready(function(){
 <div class="col">
   <div class="mb-3 roundbox" >
     <!-- Add Note -->
-    <div class="mt-0 mb-1 container align-items-center">
     <form action="/bookinginfo/{{ bookid }}" method="post">
-      <div class="input-group mt-3">
+      <div class="input-group mt-3" style="justify-content: center">
         <div class="input-group-prepend">
           <button id="notesubmit" class="btn btn-outline-primary" type="submit">Add</button>
-  <textarea class="form-control" id="notetext" rows="2" autocomplete="off" name="note" spellcheck="true" style="font-size:13px" placeholder="Add note" style="width:175px" type="text" text-align="center"></textarea>
+  <textarea class="form-control" id="notetext" rows="2" autocomplete="off" name="note" spellcheck="true" style="font-size:13px" placeholder="Add note" type="text" text-align="center"></textarea>
 </div>
 </div>
 </form>
-</div>
+
 
 
   <form action="/delete/{{ bookid }}" method="post">

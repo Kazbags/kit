@@ -87,7 +87,7 @@ main .form-image
     margin: 20px;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 1000px) {
     /* horizontal scrollbar for tables if mobile screen */
     .tablemobile {
         overflow-x: scroll;
@@ -97,9 +97,7 @@ main .form-image
         overflow-x: scroll;
         display: block;
     }
-    .delete {
-      display: none;
-    }
+
     .calendar-container {
         width: 600px;
     }
@@ -115,6 +113,28 @@ main .form-image
           display: inline;
           justify-content: center;
     }
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 102, 133,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+@media only screen and (max-width: 480px){
+  .delete {
+    display: none;
+  }
+}
+
+.center-block {
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
 }
 .table table-striped
 {
@@ -152,7 +172,7 @@ textarea{
 button{font-size:40px; line-height:60px;}
 
 .input-group-prepend, .btn-primary{
-
+text-align: center;
 font-size:13px;
 }
 .btn-outline-primary{
