@@ -113,12 +113,21 @@ main .form-image
           display: inline;
           justify-content: center;
     }
-}
 
 ::-webkit-scrollbar {
 
-  width: 10px;
+  width: 8px;
+  -webkit-appearance: none;
   -webkit-overflow-scrolling: auto;
+}
+
+::-webkit-scrollbar:vertical {
+   width: 0px;
+}
+
+::-webkit-scrollbar:horizontal {
+   height: 8px;
+   -webkit-overflow-scrolling: auto;
 }
 
 ::-webkit-scrollbar-thumb {
