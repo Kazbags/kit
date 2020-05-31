@@ -113,7 +113,7 @@ main .form-image
           display: inline;
           justify-content: center;
     }
-}
+
 ::-webkit-scrollbar {
 
   width: 8px;
@@ -136,12 +136,18 @@ main .form-image
   -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
+
 @media only screen and (max-width: 480px){
   .delete {
     display: none;
   }
 }
 
+.center-block {
+   margin-left:auto;
+   margin-right:auto;
+   display:block;
+}
 .table table-striped
 {
     height: 100%;
@@ -178,7 +184,8 @@ textarea{
 button{font-size:40px; line-height:60px;}
 
 .input-group-prepend, .btn-primary{
-
+  justify-content: center;
+  display: inline;
 font-size:13px;
 }
 .btn-outline-primary{
