@@ -300,7 +300,7 @@ def index():
 
 ###----- Asset info ----->
 @app.route("/asset/<id>", methods=["GET", "POST"])
-@login_required
+
 def asset(id):
 
     # Venue dropdown
