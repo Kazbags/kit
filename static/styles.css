@@ -115,7 +115,7 @@ main .form-image
     }
 }
 ::-webkit-scrollbar {
-  -webkit-appearance: none;
+
   width: 10px;
   -webkit-overflow-scrolling: auto
 }
