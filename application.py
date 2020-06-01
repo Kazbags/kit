@@ -300,7 +300,7 @@ def index():
 
 ###----- Asset info ----->
 @app.route("/asset/<id>", methods=["GET", "POST"])
-
+@login_required
 def asset(id):
 
     # Venue dropdown
@@ -1013,6 +1013,16 @@ def qr():
 
 
 """ Login/Logout """
+def redirect_dest(fallback):
+    dest = request.args['next']
+    print(dest)
+    id = request.args['id']
+    print(id)
+    try:
+        dest_url = url_for(dest, id=id)
+    except:
+        return redirect(fallback)
+    return redirect(dest_url)
 
 ###----- Login ---->
 @app.route("/login", methods=["GET", "POST"])
@@ -1048,7 +1058,7 @@ def login():
         session["user_id"] = rows[0]["id"]
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect_dest(fallback=url_for('index'))
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
