@@ -843,7 +843,7 @@ def calendar():
 
     #----- Theatre YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Apt%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Apt%20date%3A%23next6months?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
@@ -870,9 +870,68 @@ def calendar():
         # add to events list
         events.append(yesevent)
 
+    #----- Theatre YesPlan Events This Month---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Apt%20date%3A%23thismonth?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+        evend = booking['endtime']
+
+        # make json event
+        yesevent = {
+          'title': f"{name} ({location})",
+          'start': evstart,
+          'end': evend,
+          'url': "https://horsecross.yesplan.be/Yesplan",
+          'color': "pink"
+          }
+        # add to events list
+        events.append(yesevent)
+
+
     #----- Studio YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Astudio%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Astudio%20date%3A%23next6months?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+        evend = booking['endtime']
+
+        # Make json event
+        yesevent = {
+          'title': f"{name} ({location})",
+          'start': evstart,
+          'end': evend,
+          'url': "https://horsecross.yesplan.be/Yesplan",
+          'color': "thistle"
+          }
+        # Add to events list
+        events.append(yesevent)
+
+    #----- Studio YesPlan Events This Month---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Astudio%20date%3A%23thismonth?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
@@ -901,7 +960,7 @@ def calendar():
 
     #----- Gannochy YesPlan Events ---->
     #Get json from Yesplan API
-    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Agannochy%20date%3A%23next8months?api_key=5C76336690A5BFB115651E1D97CD4262")
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Agannochy%20date%3A%23next6months?api_key=5C76336690A5BFB115651E1D97CD4262")
     # Get dicionary of events
     data = yes.json()
     yesbooking = data['data']
@@ -927,6 +986,36 @@ def calendar():
           }
         # Add to events list
         events.append(yesevent)
+
+    #----- Gannochy YesPlan Events ---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/location%3Agannochy%20date%3A%23thismonth?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+        evend = booking['endtime']
+
+        # Make json event
+        yesevent = {
+          'title': f"{name} ({location})",
+          'start': evstart,
+          'end': evend,
+          'url': "https://horsecross.yesplan.be/Yesplan",
+          'color': "lightblue"
+          }
+        # Add to events list
+        events.append(yesevent)
+
 
 
     return render_template("calendar.php", events = events)
