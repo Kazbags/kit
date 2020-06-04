@@ -1106,7 +1106,55 @@ def eventsconfirmed():
     response.headers["Content-Disposition"] = url_for('static', filename='events.ics')
     return response
 
+@app.route("/perfconfirmed", methods=["GET", "POST"])
+def perfconfirmed():
+    f = open('static/performance.ics', 'w')
+    f.write("BEGIN:VCALENDAR\n" "VERSION:2.0\n")
 
+    #----- This Month YesPlan Events ---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/status%3A%20confirmed%20date%3A%23next4months%20isproduction%3A%20true?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+        for old, new in [('+01:00', 'Z')]:
+            evstart = evstart.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evstart = evstart.replace(old, new)
+        evend = booking['endtime']
+        for old, new in [('+01:00', 'Z')]:
+            evend = evend.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evend = evend.replace(old, new)
+
+        f.write("BEGIN:VEVENT\n"
+        f"DTSTART:{evstart}\n"
+        f"DTEND:{evend}\n"
+        f"LOCATION:{location}\n"
+        f"SUMMARY:{name}\n"
+        "END:VEVENT\n")
+
+    f.write("END:VCALENDAR")
+    f.close()
+
+    with open("static/performance.ics", "r") as file:
+        perf = file.read()
+        print(perf)
+    #  turn calendar data into a response
+    response = make_response(perf)
+    response.headers["Content-Disposition"] = url_for('static', filename='performance.ics')
+    return response
 
 ###----- Delete Booking ----->
 @app.route("/delete/<id>", methods=["POST"])
