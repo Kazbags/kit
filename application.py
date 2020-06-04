@@ -1,7 +1,7 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for, make_response
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
@@ -12,6 +12,7 @@ import pytz
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
+
 
 from helpers import login_required
 
@@ -1019,6 +1020,93 @@ def calendar():
 
 
     return render_template("calendar.php", events = events)
+
+
+@app.route("/eventsconfirmed", methods=["GET", "POST"])
+def eventsconfirmed():
+    f = open('static/events.ics', 'w')
+    f.write("BEGIN:VCALENDAR\n" "VERSION:2.0\n")
+
+    #----- This Month YesPlan Events ---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/status%3A%20confirmed%20date%3A%23thismonth%20isproduction%3A%20false?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+        for old, new in [('+01:00', 'Z')]:
+            evstart = evstart.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evstart = evstart.replace(old, new)
+        evend = booking['endtime']
+        for old, new in [('+01:00', 'Z')]:
+            evend = evend.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evend = evend.replace(old, new)
+
+        f.write("BEGIN:VEVENT\n"
+        f"DTSTART:{evstart}\n"
+        f"DTEND:{evend}\n"
+        f"LOCATION:{location}\n"
+        f"SUMMARY:{name}\n"
+        "END:VEVENT\n")
+
+
+    #----- Next Month YesPlan Events ---->
+    #Get json from Yesplan API
+    yes = requests.get("https://horsecross.yesplan.be/api/events/status%3A%20confirmed%20date%3A%23nextmonth%20isproduction%3A%20false?api_key=5C76336690A5BFB115651E1D97CD4262")
+    # Get dicionary of events
+    data = yes.json()
+    yesbooking = data['data']
+
+    # Values for json event for Fullcalendar
+    for booking in yesbooking:
+
+        if booking['group'] == None:
+            name = "no event title"
+        else:
+            name = booking['group']['name']
+
+        location = booking['locations'][0]['name']
+        evstart = booking['starttime']
+
+        for old, new in [('+01:00', 'Z')]:
+            evstart = evstart.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evstart = evstart.replace(old, new)
+        evend = booking['endtime']
+        for old, new in [('+01:00', 'Z')]:
+            evend = evend.replace(old, new)
+        for old, new in [(":", ""), ("-", "")]:
+            evend = evend.replace(old, new)
+
+        f.write("BEGIN:VEVENT\n"
+        f"DTSTART:{evstart}\n"
+        f"DTEND:{evend}\n"
+        f"LOCATION:{location}\n"
+        f"SUMMARY:{name}\n"
+        "END:VEVENT\n")
+
+    f.write("END:VCALENDAR")
+
+    with open("static/events.ics", "r") as text_file:
+        cal = text_file.read()
+    #  turn calendar data into a response
+    response = make_response(cal)
+    response.headers["Content-Disposition"] = url_for('static', filename='events.ics')
+    return response
+
+
 
 ###----- Delete Booking ----->
 @app.route("/delete/<id>", methods=["POST"])
