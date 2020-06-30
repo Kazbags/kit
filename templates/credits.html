@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Credits
+{% endblock %}
+
+{% block script %}
+
+<script>
+$(document).ready(function(){
+    $('#filtersubmit').prop('disabled',true);
+    $('#filtertext').keyup(function(){
+        $('#filtersubmit').prop('disabled', this.value == "" ? true : false);
+    })
+});
+</script>
+{% endblock %}
+
+{% block main %}
+<h5 class="red">Join the Movement</h5>
+
+<form action="/credits" method="post">
+<div class="row">
+<div class ="col">
+<div  class="form-group">
+<input id="addtype" autocomplete="off"  class="form-control" name="name" spellcheck="true" placeholder="Name"  type="text">
+</div>
+</div>
+<div class ="col">
+<div  class="form-group">
+<input id="addtype" autocomplete="off"  class="form-control" name="job" spellcheck="true" placeholder="Job/Specialism"  type="text">
+</div>
+</div>
+<div class ="col">
+<div  class="form-group">
+<input id="addtype" autocomplete="off"  class="form-control" name="company" spellcheck="true" placeholder="Company/Freelance?"  type="text">
+</div>
+</div>
+<div class ="col">
+<div  class="form-group">
+<input id="addtype" autocomplete="off"  class="form-control" name="location" spellcheck="true" placeholder="Location"  type="text">
+</div>
+</div>
+<div class ="col">
+<button class="btn btn-danger" type="submit">Submit</button>
+</div>
+</div>
+</form>
+
+{% for item in list %}
+
+- {{ item['name'] }},<span style="font-size: 11px"> {{ item['job'] }}, {{ item['company'] }}, {{ item['location'] }} </span>-
+
+{% endfor %}
+
+{% endblock %}
